@@ -1,2 +1,19 @@
+import { useNavigate } from "react-router";
+import ProfileForm from "./ProfileForm";
+import { InitialUser } from "../schemas/constants";
+import { useUser } from "../context/user-context";
 
-export default function RegisterForm(){}
+export default function RegisterForm() {
+  const navigate = useNavigate()
+  const { setUser } = useUser()
+
+  const onSubmit = (values) => {
+    setUser(values)
+    navigate ("/display")
+  }
+
+  return <ProfileForm initialValues={
+    InitialUser
+  } onSubmit={onSubmit}/>
+ 
+}

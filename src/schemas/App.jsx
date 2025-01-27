@@ -1,15 +1,35 @@
+import "./App.css";
+// import React from 'react'
+import { BrowserRouter, Routes, Route } from "react-router";
+import CreateAccount from "../pages/createAccount";
+import DisplayAccount from "../pages/DisplayAccount";
+import UpdateAccount from "../pages/updateAccount";
+import UserContext from "../context/user-context";
+import { InitialUser } from "./constants";
+import { useEffect, useMemo, useState } from "react";
 
+export default function App() {
+  const [user, setUser] = useState(() => {
+    const currentUser = localStorage.getItem("user");
 
-import './App.css'
+    return currentUser ? JSON.parse(currentUser) : InitialUser;
+  });
 
-function App() {
- 
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
+
+  const contextValue = useMemo(() => ({ user, setUser }), [user, setUser]);
 
   return (
-    <>
-     
-    </>
-  )
+    <UserContext.Provider value={contextValue}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<CreateAccount />} />
+          <Route path="/display" element={<DisplayAccount />} />
+          <Route path="/update" element={<UpdateAccount />} />
+        </Routes>
+      </BrowserRouter>
+    </UserContext.Provider>
+  );
 }
-
-export default App
