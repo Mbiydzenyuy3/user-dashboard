@@ -28,7 +28,7 @@ export default function Profile() {
           <strong>Phone Number</strong>: {accountInfo.telephone}
         </p>
         <button className="edit-info" onClick={update}>
-          Update info
+          Update infos
         </button>
       </div>
     </>
