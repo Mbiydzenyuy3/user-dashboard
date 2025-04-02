@@ -31,9 +31,9 @@ export default function ProfileForm({
 
   return (
     <>
-      <h1 className="sign-up">{title}</h1>
       <div className="app">
         <form className="signup_form" onSubmit={handleSubmit}>
+          <h1 className="sign-up">{title}</h1>
           <label htmlFor="firstname">First Name</label>
           <input
             type="text"
